@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty_.databinding.ItemLocationBinding
 import com.example.rickandmorty_.models.RickAndMortyLocation
 
-class AdapterLocation : PagingDataAdapter<RickAndMortyLocation, AdapterLocation.LocationViewHolder>(
+class LocationAdapter : PagingDataAdapter<RickAndMortyLocation, LocationAdapter.LocationViewHolder>(
     LocationComparator
 ) {
 

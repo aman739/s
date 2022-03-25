@@ -7,7 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmorty_.R
 import com.example.rickandmorty_.base.BaseFragment
 import com.example.rickandmorty_.databinding.FragmentEpisodesBinding
-import com.example.rickandmorty_.ui.adapters.AdapterEpisodes
+import com.example.rickandmorty_.ui.adapters.EpisodesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -19,12 +19,12 @@ class EpisodesFragment : BaseFragment<FragmentEpisodesBinding, EpisodesViewModel
 
     override val binding by viewBinding(FragmentEpisodesBinding::bind)
     override val viewModel: EpisodesViewModel by viewModels()
-    private val adapterEpisodes = AdapterEpisodes()
+    private val episodesAdapter = EpisodesAdapter()
 
 
     override fun initialize() {
         binding.recyclerviewEpisodes.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewEpisodes.adapter = adapterEpisodes
+        binding.recyclerviewEpisodes.adapter = episodesAdapter
     }
 
     override fun setupObserves() {
@@ -35,7 +35,7 @@ class EpisodesFragment : BaseFragment<FragmentEpisodesBinding, EpisodesViewModel
     private fun subscribeToEpisodes() {
         lifecycleScope.launch {
             viewModel.fetchEpisodes().collectLatest {
-                adapterEpisodes.submitData(it)
+                episodesAdapter.submitData(it)
             }
         }
     }

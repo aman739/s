@@ -17,27 +17,5 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, BaseViewModel>(
 
     override val binding by viewBinding(FragmentDetailBinding::bind)
     override val viewModel: CharactersViewModel by activityViewModels()
-    private val args by navArgs<DetailFragmentArgs>()
 
-    override fun setupViews() {
-        getData()
-    }
-
-    private fun getData() {
-//        viewModel.fetchCharacterID(args.id).observe(viewLifecycleOwner) {
-//            when (it) {
-//                is Resource.Loading -> {
-//                    Log.e("loo", "olo")
-//                }
-//                is Resource.Error -> {
-//                    Log.e("tag", "Error Character ${it.massage.toString()}")
-//                }
-//                is Resource.Success -> {
-//                    binding.tvName.text = it.data?.name
-//                    it.data?.let { it1 -> binding.ivImage.setImage(it1.image) }
-//                }
-//            }
-//        }
-//    }
-    }
 }

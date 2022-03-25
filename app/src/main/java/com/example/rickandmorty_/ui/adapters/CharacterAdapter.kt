@@ -9,8 +9,8 @@ import com.example.rickandmorty_.common.extensions.setImage
 import com.example.rickandmorty_.databinding.ItemCharacterBinding
 import com.example.rickandmorty_.models.RickAndMortyCharacter
 
-class AdapterCharacter :
-    PagingDataAdapter<RickAndMortyCharacter, AdapterCharacter.CharacterViewHolder>(
+class CharacterAdapter :
+    PagingDataAdapter<RickAndMortyCharacter, CharacterAdapter.CharacterViewHolder>(
         CharacterComparator
     ) {
 

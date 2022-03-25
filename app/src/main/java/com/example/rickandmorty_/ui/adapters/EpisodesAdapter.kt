@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty_.databinding.ItemEpisodesBinding
 import com.example.rickandmorty_.models.RickAndMortyEpisodes
 
-class AdapterEpisodes :
-    PagingDataAdapter<RickAndMortyEpisodes, AdapterEpisodes.EpisodesViewHolder>(
+class EpisodesAdapter :
+    PagingDataAdapter<RickAndMortyEpisodes, EpisodesAdapter.EpisodesViewHolder>(
         EpisodesComparator
     ) {
 

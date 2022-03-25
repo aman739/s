@@ -7,7 +7,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmorty_.R
 import com.example.rickandmorty_.base.BaseFragment
 import com.example.rickandmorty_.databinding.FragmentCharacterBinding
-import com.example.rickandmorty_.ui.adapters.AdapterCharacter
+import com.example.rickandmorty_.databinding.ProgressBarLoaderStateBinding
+import com.example.rickandmorty_.ui.adapters.CharacterAdapter
+import com.example.rickandmorty_.ui.adapters.PagingStateADapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -18,7 +20,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
 ) {
     override val binding by viewBinding(FragmentCharacterBinding::bind)
     override val viewModel: CharactersViewModel by viewModels()
-    private val adapterCharacter = AdapterCharacter()
+    private val characterAdapter = CharacterAdapter()
 
     override fun setupViews() {
         setupAdapter()
@@ -26,7 +28,10 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
 
     private fun setupAdapter() {
         binding.recyclerviewCharacter.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewCharacter.adapter = adapterCharacter
+        binding.recyclerviewCharacter.adapter = characterAdapter.withLoadStateHeaderAndFooter(
+            header = PagingStateADapter{characterAdapter.retry()},
+            footer = PagingStateADapter{characterAdapter.retry()},
+        )
     }
 
     override fun setupObserves() {
@@ -36,7 +41,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
     private fun subscribeToCharacters() {
         lifecycleScope.launch {
             viewModel.fetchCharacters().collectLatest {
-                adapterCharacter.submitData(it)
+                characterAdapter.submitData(it)
             }
         }
     }

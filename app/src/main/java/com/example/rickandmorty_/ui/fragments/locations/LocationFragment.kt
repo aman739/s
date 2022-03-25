@@ -7,7 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmorty_.R
 import com.example.rickandmorty_.base.BaseFragment
 import com.example.rickandmorty_.databinding.FragmentLocationBinding
-import com.example.rickandmorty_.ui.adapters.AdapterLocation
+import com.example.rickandmorty_.ui.adapters.LocationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
     override val binding by viewBinding(FragmentLocationBinding::bind)
     override val viewModel: LocationViewModel by viewModels()
-    private val adapterLocation = AdapterLocation()
+    private val adapterLocation = LocationAdapter()
 
 
     override fun initialize() {

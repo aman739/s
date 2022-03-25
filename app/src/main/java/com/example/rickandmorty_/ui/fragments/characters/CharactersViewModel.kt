@@ -12,5 +12,4 @@ class CharactersViewModel @Inject constructor(
     private val repository: CharacterRepository
 ) : BaseViewModel() {
     fun fetchCharacters() = repository.fetchCharacters().cachedIn(viewModelScope)
-    //    fun fetchCharacterID(id: Int) = repository.fetchCharacterID(id)
 }
