@@ -89,10 +89,9 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-
-    //Paging 3
-    def paging_version = "3.1.1"
-    implementation "androidx.paging:paging-runtime:$paging_version"
-
+    //CircleImage
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Dependency for Material Components
+    implementation 'com.google.android.material:material:<version>'
 
 }

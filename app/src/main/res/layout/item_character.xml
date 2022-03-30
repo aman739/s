@@ -6,20 +6,24 @@
     android:layout_height="wrap_content"
     android:elevation="8dp"
     app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#393c42"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+
         android:orientation="horizontal">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_character"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:padding="6dp"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            app:shapeAppearanceOverlay="@style/SpecificCornerRounded"
+            />
 
         <TextView
             android:id="@+id/tv_name"
@@ -27,6 +31,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:textSize="20sp"
+            android:textColor="@color/white"
             android:textStyle="bold"
             tools:text="@tools:sample/full_names" />
     </LinearLayout>

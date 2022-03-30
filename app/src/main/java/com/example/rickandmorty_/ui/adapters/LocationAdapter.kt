@@ -2,13 +2,13 @@ package com.example.rickandmorty_.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty_.databinding.ItemLocationBinding
 import com.example.rickandmorty_.models.RickAndMortyLocation
 
-class LocationAdapter : PagingDataAdapter<RickAndMortyLocation, LocationAdapter.LocationViewHolder>(
+class LocationAdapter : ListAdapter<RickAndMortyLocation, LocationAdapter.LocationViewHolder>(
     LocationComparator
 ) {
 
@@ -53,10 +53,6 @@ class LocationAdapter : PagingDataAdapter<RickAndMortyLocation, LocationAdapter.
             newItem: RickAndMortyLocation
         ): Boolean {
             return oldItem == newItem
-
-
         }
-
-
     }
 }

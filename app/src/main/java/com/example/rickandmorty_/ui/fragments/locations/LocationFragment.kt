@@ -8,34 +8,41 @@ import com.example.rickandmorty_.R
 import com.example.rickandmorty_.base.BaseFragment
 import com.example.rickandmorty_.databinding.FragmentLocationBinding
 import com.example.rickandmorty_.ui.adapters.LocationAdapter
+import com.example.rickandmorty_.common.extensions.submitDataPaging
+import com.example.rickandmorty_.ulits.PaginationScrollListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel>(
     R.layout.fragment_location
 ) {
-
     override val binding by viewBinding(FragmentLocationBinding::bind)
     override val viewModel: LocationViewModel by viewModels()
-    private val adapterLocation = LocationAdapter()
+    private val locationAdapter = LocationAdapter()
 
-
-    override fun initialize() {
-        binding.recyclerviewLocations.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewLocations.adapter = adapterLocation
+    override fun setupViews() {
+        setupAdapter()
     }
-
     override fun setupObserves() {
         subscribeToLocation()
     }
 
-    private fun subscribeToLocation() {
-        lifecycleScope.launch {
-            viewModel.fetchLocations().collectLatest {
-                adapterLocation.submitData(it)
+    private fun setupAdapter() = with(binding.recyclerviewLocations) {
+        adapter = locationAdapter
+        val linearLayoutManager = LinearLayoutManager(context)
+        layoutManager = linearLayoutManager
 
+        addOnScrollListener(object :
+            PaginationScrollListener(linearLayoutManager, { viewModel.fetchLocation() }) {
+            override fun isLoading() = viewModel.isLoading
+        })
+    }
+
+    private fun subscribeToLocation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.locationState.observe(viewLifecycleOwner) {
+                locationAdapter.submitDataPaging(it)
             }
         }
     }

@@ -15,9 +15,13 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/RickAndMorty_/app/src/main/res/layout/item_episodes.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/RickAndMorty_/app/src/main/res/layout/item_location.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/RickAndMorty_/app/src/main/res/layout/progress_bar_loader.xml" value="0.2203125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/RickAndMorty_/app/src/main/res/layout/progress_bar_loader_state.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/RickAndMorty_/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/rickandmorty_/ui/adapters/PagingStateADapter.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

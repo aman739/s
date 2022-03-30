@@ -2,14 +2,14 @@ package com.example.rickandmorty_.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty_.databinding.ItemEpisodesBinding
 import com.example.rickandmorty_.models.RickAndMortyEpisodes
 
 class EpisodesAdapter :
-    PagingDataAdapter<RickAndMortyEpisodes, EpisodesAdapter.EpisodesViewHolder>(
+    ListAdapter<RickAndMortyEpisodes, EpisodesAdapter.EpisodesViewHolder>(
         EpisodesComparator
     ) {
 

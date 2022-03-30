@@ -1,18 +1,16 @@
 package com.example.rickandmorty_.ui.fragments.characters
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmorty_.R
 import com.example.rickandmorty_.base.BaseFragment
 import com.example.rickandmorty_.databinding.FragmentCharacterBinding
-import com.example.rickandmorty_.databinding.ProgressBarLoaderStateBinding
 import com.example.rickandmorty_.ui.adapters.CharacterAdapter
-import com.example.rickandmorty_.ui.adapters.PagingStateADapter
+import com.example.rickandmorty_.common.extensions.submitDataPaging
+import com.example.rickandmorty_.ulits.PaginationScrollListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewModel>(
@@ -20,18 +18,21 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
 ) {
     override val binding by viewBinding(FragmentCharacterBinding::bind)
     override val viewModel: CharactersViewModel by viewModels()
-    private val characterAdapter = CharacterAdapter()
+    private val characterAdapter = CharacterAdapter(this :: onItemClick)
 
     override fun setupViews() {
         setupAdapter()
     }
 
-    private fun setupAdapter() {
-        binding.recyclerviewCharacter.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewCharacter.adapter = characterAdapter.withLoadStateHeaderAndFooter(
-            header = PagingStateADapter{characterAdapter.retry()},
-            footer = PagingStateADapter{characterAdapter.retry()},
-        )
+    private fun setupAdapter() = with(binding.recyclerviewCharacter) {
+        val linearLayoutManager = LinearLayoutManager(context)
+        layoutManager = linearLayoutManager
+        adapter = characterAdapter
+
+        addOnScrollListener(object :
+            PaginationScrollListener(linearLayoutManager, { viewModel.fetchCharacters() }) {
+            override fun isLoading() = viewModel.isLoading
+        })
     }
 
     override fun setupObserves() {
@@ -39,14 +40,13 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
     }
 
     private fun subscribeToCharacters() {
-        lifecycleScope.launch {
-            viewModel.fetchCharacters().collectLatest {
-                characterAdapter.submitData(it)
-            }
+        viewModel.characterState.observe(viewLifecycleOwner) {
+            characterAdapter.submitDataPaging(it)
         }
     }
+    private fun onItemClick(id: Int) {
+        findNavController().navigate(
+            CharacterFragmentDirections.actionCharacterFragmentToDetailFragment(id)
+        )
+    }
 }
-
-
-
-

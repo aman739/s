@@ -10,6 +10,5 @@ data class RickAndMortyCharacter(
     val name: String,
 
     @SerializedName("image")
-    val image: String
-
+    val image: String,
 )
