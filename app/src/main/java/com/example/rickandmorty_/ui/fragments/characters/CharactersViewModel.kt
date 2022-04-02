@@ -34,6 +34,7 @@ class CharactersViewModel @Inject constructor(
             }
         }
     }
+
     fun getCharacters() =
         repository.getCharacters().collectFlow(_characterLocaleState){}
 }

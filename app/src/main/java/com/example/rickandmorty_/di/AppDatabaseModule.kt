@@ -23,10 +23,12 @@ object AppDatabaseModule {
     @Provides
     fun provideCharacterDao(appDatabase: AppDatabase)=
         RoomClient().provideCharacterDao(appDatabase)
+
     @Singleton
     @Provides
     fun provideEpisodesDao(appDatabase: AppDatabase)=
         RoomClient().provideEpisodesDao(appDatabase)
+
     @Singleton
     @Provides
     fun provideLocationDao(appDatabase: AppDatabase)=

@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class RickAndMortyCharacter(
+
     @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val id: Int,

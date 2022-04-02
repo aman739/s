@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewModel>(
     R.layout.fragment_character
 ) {
+
     override val binding by viewBinding(FragmentCharacterBinding::bind)
     override val viewModel: CharactersViewModel by viewModels()
     private val characterAdapter = CharacterAdapter(this::onItemClickListener)
@@ -31,9 +32,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
     override fun setupObserves() {
         subscribeToCharacters()
         subscribeToCharactersLocale()
-
     }
-
 
     private fun setupAdapter() = with(binding.recyclerviewCharacter) {
         val linearLayoutManager = LinearLayoutManager(context)
@@ -64,7 +63,6 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
     private fun subscribeToCharactersLocale() {
         viewModel.characterLocateState.observe(viewLifecycleOwner) {
             characterAdapter.submitDataPaging(it)
-
         }
     }
 

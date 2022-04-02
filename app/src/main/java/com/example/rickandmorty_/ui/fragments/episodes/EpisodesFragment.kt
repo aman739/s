@@ -3,7 +3,6 @@ package com.example.rickandmorty_.ui.fragments.episodes
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -19,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EpisodesFragment : BaseFragment<FragmentEpisodesBinding,EpisodesViewModel>(
     R.layout.fragment_episodes
 ) {
+
     override val binding by viewBinding(FragmentEpisodesBinding::bind)
     override val viewModel: EpisodesViewModel by viewModels()
     private val episodesAdapter = EpisodesAdapter()
@@ -31,6 +31,7 @@ class EpisodesFragment : BaseFragment<FragmentEpisodesBinding,EpisodesViewModel>
         subscribeToEpisodes()
         subscribeToEpisodesLocale()
     }
+
     private fun setupAdapter() = with(binding.recyclerviewEpisodes) {
         val linearLayoutManager = LinearLayoutManager(context)
         layoutManager = linearLayoutManager
@@ -58,7 +59,6 @@ class EpisodesFragment : BaseFragment<FragmentEpisodesBinding,EpisodesViewModel>
     private fun subscribeToEpisodesLocale() {
         viewModel.episodesLocateState.observe(viewLifecycleOwner) {
             episodesAdapter.submitDataPaging(it)
-
         }
     }
 

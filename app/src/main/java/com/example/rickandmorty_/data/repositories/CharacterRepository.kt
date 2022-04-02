@@ -14,7 +14,8 @@ class CharacterRepository @Inject constructor(
         {
             service.fetchCharacters(page)
         },
-        { characters ->
+        {
+                characters ->
             characterDao.insertAll(*characters.results.toTypedArray())
         }
     )

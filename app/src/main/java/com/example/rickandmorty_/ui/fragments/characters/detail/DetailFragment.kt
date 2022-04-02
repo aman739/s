@@ -18,13 +18,13 @@ import kotlinx.coroutines.launch
 class DetailFragment : BaseFragment<FragmentDetailBinding, BaseViewModel>(
     R.layout.fragment_detail
 ) {
-
     override val binding by viewBinding(FragmentDetailBinding::bind)
     override val viewModel: DetailsViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
     override fun setupObserves() {
         subscribeToCharacters()
     }
+
     private fun subscribeToCharacters() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.fetchSingleCharacter(args.id).collect {

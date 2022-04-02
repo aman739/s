@@ -15,7 +15,7 @@ import javax.inject.Inject
 class LocationViewModel @Inject constructor(
     private val repository: LocationsRepository
 ) : BaseViewModel() {
-    var page = 1
+    var page = 0
     var isLoading: Boolean = false
 
     private val _locationState = MutableLiveData<RickAndMortyResponse<RickAndMortyLocation>>()
@@ -24,28 +24,6 @@ class LocationViewModel @Inject constructor(
     private val _locationLocaleState =
         MutableLiveData<List<RickAndMortyLocation>>()
     val locationLocateState: LiveData<List<RickAndMortyLocation>> = _locationLocaleState
-
-//    fun fetchLocations() = viewModelScope.launch {
-//        repository.fetchLocation(page).collect {
-//            when (it) {
-//                is Resource.Loading -> {
-//                    isLoading = true
-//                }
-//                is Resource.Error -> {
-//                    Log.e("bankai", it.message.toString())
-//                }
-//                is Resource.Success -> {
-//                    if (it.data?.info?.next != null) {
-//                        page++
-//                        isLoading = false
-//                        it.data?.let { it ->
-//                            _locationState.postValue(it)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     fun fetchLocations() = viewModelScope.launch {
         isLoading = true
@@ -56,7 +34,6 @@ class LocationViewModel @Inject constructor(
             }
         }
     }
-
     fun getEpisodes() =
         repository.getLocation().collectFlow(_locationLocaleState, {})
 }

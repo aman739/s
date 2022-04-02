@@ -23,6 +23,7 @@ class CharacterAdapter(
             )
         )
     }
+
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         getItem(position)?.let {
             holder.onBind(it)
@@ -42,6 +43,7 @@ class CharacterAdapter(
             }
         }
     }
+
     object CharacterComparator : DiffUtil.ItemCallback<RickAndMortyCharacter>() {
         override fun areItemsTheSame(
             oldItem: RickAndMortyCharacter,

@@ -14,7 +14,8 @@ class LocationsRepository @Inject constructor(
         {
             service.fetchLocations(page)
         },
-        { location ->
+        {
+                location ->
             locationDao.insertAll(*location.results.toTypedArray())
         }
     )

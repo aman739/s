@@ -15,7 +15,7 @@ import javax.inject.Inject
 class EpisodesViewModel @Inject constructor(
     private val repository: EpisodesRepository
 ) : BaseViewModel() {
-    var pagee = 1
+    var page = 0
     var isLoading: Boolean = false
 
     private val _episodesState = MutableLiveData<RickAndMortyResponse<RickAndMortyEpisodes>>()
@@ -25,38 +25,16 @@ class EpisodesViewModel @Inject constructor(
         MutableLiveData<List<RickAndMortyEpisodes>>()
     val episodesLocateState: LiveData<List<RickAndMortyEpisodes>> = _episodesLocaleState
 
-//    fun fetchEpisodes() = viewModelScope.launch {
-//        repository.fetchEpisodes(pagee).collect {
-//            when (it) {
-//                is Resource.Loading -> {
-//                    isLoading = true
-//                }
-//                is Resource.Error -> {
-//                    android.util.Log.e("bankai", it.message.toString())
-//                }
-//                is Resource.Success -> {
-//                    if (it.data?.info?.next != null) {
-//                        pagee++
-//                        isLoading = false
-//                        it.data?.let { it ->
-//                            _episodesState.postValue(it)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     fun fetchEpisodes() = viewModelScope.launch {
         isLoading = true
-        repository.fetchEpisodes(pagee).collectFlow(_episodesState) {
+        repository.fetchEpisodes(page).collectFlow(_episodesState) {
             if (it.info.next != null) {
                 isLoading = false
-                pagee++
+                page++
             }
         }
     }
-
     fun getEpisodes() =
         repository.getEpisodes().collectFlow(_episodesLocaleState, {})
+
 }

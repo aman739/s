@@ -14,7 +14,8 @@ class EpisodesRepository @Inject constructor(
         {
             service.fetchEpisodes(page)
         },
-        { episodes ->
+        {
+                episodes ->
             episodesDao.insertAll(*episodes.results.toTypedArray())
         }
     )

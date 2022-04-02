@@ -3,7 +3,6 @@ package com.example.rickandmorty_.ui.fragments.locations
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -19,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel>(
     R.layout.fragment_location
 ) {
+
     override val binding by viewBinding(FragmentLocationBinding::bind)
     override val viewModel: LocationViewModel by viewModels()
     private val locationAdapter = LocationAdapter()
@@ -31,11 +31,11 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         subscribeToLocation()
         subscribeToLocationsLocale()
     }
+
     private fun setupAdapter() = with(binding.recyclerviewLocations) {
         val linearLayoutManager = LinearLayoutManager(context)
         layoutManager = linearLayoutManager
         adapter = locationAdapter
-
         addOnScrollListener(object :
             PaginationScrollListener(linearLayoutManager, {
                 if (isOnline()) {
@@ -58,7 +58,6 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     private fun subscribeToLocationsLocale() {
         viewModel.locationLocateState.observe(viewLifecycleOwner) {
             locationAdapter.submitDataPaging(it)
-
         }
     }
 
