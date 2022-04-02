@@ -1,7 +1,10 @@
 package com.example.rickandmorty_.ui.fragments.locations
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmorty_.R
@@ -11,7 +14,6 @@ import com.example.rickandmorty_.ui.adapters.LocationAdapter
 import com.example.rickandmorty_.common.extensions.submitDataPaging
 import com.example.rickandmorty_.ulits.PaginationScrollListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel>(
@@ -24,26 +26,50 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     override fun setupViews() {
         setupAdapter()
     }
+
     override fun setupObserves() {
         subscribeToLocation()
+        subscribeToLocationsLocale()
     }
-
     private fun setupAdapter() = with(binding.recyclerviewLocations) {
-        adapter = locationAdapter
         val linearLayoutManager = LinearLayoutManager(context)
         layoutManager = linearLayoutManager
+        adapter = locationAdapter
 
         addOnScrollListener(object :
-            PaginationScrollListener(linearLayoutManager, { viewModel.fetchLocation() }) {
+            PaginationScrollListener(linearLayoutManager, {
+                if (isOnline()) {
+                    viewModel.fetchLocations()
+                } else {
+                    null
+                }
+            }) {
             override fun isLoading() = viewModel.isLoading
         })
     }
 
     private fun subscribeToLocation() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.locationState.observe(viewLifecycleOwner) {
-                locationAdapter.submitDataPaging(it)
-            }
+        viewModel.locationState.observe(viewLifecycleOwner) {
+            locationAdapter.submitDataPaging(it.results)
+            Log.e("bankai", "subscribeToEpisodes: ${it.results}")
         }
+    }
+
+    private fun subscribeToLocationsLocale() {
+        viewModel.locationLocateState.observe(viewLifecycleOwner) {
+            locationAdapter.submitDataPaging(it)
+
+        }
+    }
+
+    override fun setupRequests() {
+        if (viewModel.locationState.value == null && isOnline()) viewModel.fetchLocations()
+        else viewModel.getEpisodes()
+    }
+
+    fun isOnline(): Boolean {
+        val cm = requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = cm.activeNetworkInfo
+        return netInfo != null && netInfo.isConnectedOrConnecting
     }
 }

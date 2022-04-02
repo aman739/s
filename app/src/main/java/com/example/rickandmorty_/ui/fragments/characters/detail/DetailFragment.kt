@@ -25,17 +25,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, BaseViewModel>(
     override fun setupObserves() {
         subscribeToCharacters()
     }
-
-
     private fun subscribeToCharacters() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.fetchSingleCharacter(args.id).collect {
                 when (it) {
                     is Resource.Loading -> {
-                        Log.e("anime", "Loading")
+                        Log.e("bankai", "Loading")
                     }
                     is Resource.Error -> {
-                        Log.e("anime", "error,${it.message.toString()}")
+                        Log.e("bankai", "error,${it.message.toString()}")
                     }
                     is Resource.Success -> {
                    binding.tvName.text = it.data?.name
