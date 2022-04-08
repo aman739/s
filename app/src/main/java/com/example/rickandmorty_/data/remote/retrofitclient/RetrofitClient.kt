@@ -1,6 +1,6 @@
-package com.example.rickandmorty_.data.remote
+package com.example.rickandmorty_.data.remote.retrofitclient
 
-import com.example.rickandmorty_.common.Constants.BASE_URL
+import com.example.rickandmorty_.common.constant.Constants.BASE_URL
 import com.example.rickandmorty_.data.remote.apiserices.CharacterApiService
 import com.example.rickandmorty_.data.remote.apiserices.EpisodesApiService
 import com.example.rickandmorty_.data.remote.apiserices.LocationsApiService

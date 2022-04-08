@@ -1,6 +1,6 @@
 package com.example.rickandmorty_.di
 
-import com.example.rickandmorty_.data.remote.RetrofitClient
+import com.example.rickandmorty_.data.remote.retrofitclient.RetrofitClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

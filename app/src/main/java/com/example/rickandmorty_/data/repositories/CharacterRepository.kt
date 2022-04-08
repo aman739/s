@@ -11,15 +11,11 @@ class CharacterRepository @Inject constructor(
 ) :
     BaseRepository() {
     fun fetchCharacters(page: Int) = doRequest(
-        {
-            service.fetchCharacters(page)
-        },
-        {
-                characters ->
+        { service.fetchCharacters(page) },
+        { characters ->
             characterDao.insertAll(*characters.results.toTypedArray())
         }
     )
-
     fun getCharacters() = doRequest {
         characterDao.getAll()
     }

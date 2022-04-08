@@ -78,6 +78,7 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     def view_biding_property_delegate = '1.5.3'
@@ -101,5 +102,10 @@ dependencies {
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation "androidx.room:room-guava:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+//    def koin_version = "3.2.0-beta-1"
+//    // Koin for Android
+//    implementation "io.insert-koin:koin-android:$koin_version"
+//    api "io.insert-koin:koin-core:$koin_version"
 
 }

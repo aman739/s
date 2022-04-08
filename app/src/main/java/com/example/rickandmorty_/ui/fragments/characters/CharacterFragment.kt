@@ -43,10 +43,8 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharactersViewM
             PaginationScrollListener(linearLayoutManager, {
                 if (isOnline()) {
                     viewModel.fetchCharacters()
-                    Toast.makeText(requireContext(), "online", Toast.LENGTH_SHORT).show()
                 } else {
                     null
-                    Toast.makeText(requireContext(), "offline", Toast.LENGTH_SHORT).show()
                 }
             }) {
             override fun isLoading() = viewModel.isLoading

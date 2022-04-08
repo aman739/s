@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmorty_.common.extensions.setImage
+import com.example.rickandmorty_.common.extensions.loadImagesWithGlide
 import com.example.rickandmorty_.databinding.ItemCharacterBinding
 import com.example.rickandmorty_.models.RickAndMortyCharacter
 
@@ -34,9 +34,10 @@ class CharacterAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(data: RickAndMortyCharacter) {
-            binding.ivCharacter.setImage(data.image)
+            binding.ivCharacter.loadImagesWithGlide(data.image, binding.itemCharacterProgressBar)
             binding.tvName.text = data.name
         }
+
         init {
             binding.root.setOnClickListener {
                 getItem(absoluteAdapterPosition)?.let { m -> onItemClick(m.id) }

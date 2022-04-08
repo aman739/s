@@ -17,12 +17,11 @@ abstract class BaseRepository {
             } catch (ioExeption: Exception) {
                 emit(
                     Resource.Error(
-                        data = null, message = ioExeption.localizedMessage ?: "bankai"
+                        data = null, message = ioExeption.localizedMessage?: "bankai"
                     )
                 )
             }
         }
-
     protected fun <T> doRequest(request: suspend () -> T) = flow {
         emit(Resource.Loading())
         try {
@@ -30,7 +29,7 @@ abstract class BaseRepository {
         } catch (ioExeption: Exception) {
             emit(
                 Resource.Error(
-                    data = null, message = ioExeption.localizedMessage ?: "bankai"
+                    data = null, message = ioExeption.localizedMessage?: "bankai"
                 )
             )
         }

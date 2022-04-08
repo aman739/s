@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.rickandmorty_.R
 import com.example.rickandmorty_.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

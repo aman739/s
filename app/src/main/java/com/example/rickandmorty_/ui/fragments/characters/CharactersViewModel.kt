@@ -15,7 +15,7 @@ import javax.inject.Inject
 class CharactersViewModel @Inject constructor(
     private val repository: CharacterRepository
 ) : BaseViewModel() {
-    var page = 0
+    var page = 820
     var isLoading: Boolean = false
 
     private val _characterState = MutableLiveData<RickAndMortyResponse<RickAndMortyCharacter>>()

@@ -13,8 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-
         android:orientation="horizontal">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:id="@+id/item_character_progress_bar"
+            android:layout_height="wrap_content"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_character"

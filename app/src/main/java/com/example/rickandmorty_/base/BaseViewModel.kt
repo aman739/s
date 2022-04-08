@@ -12,7 +12,6 @@ abstract class BaseViewModel : ViewModel() {
     protected fun <T> Flow<Resource<T>>.collectFlow(
         state: MutableLiveData<T>,
         data: (data: T) -> Unit?
-
     ) {
         viewModelScope.launch {
             collect {
